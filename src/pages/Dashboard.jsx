@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Data from "../components/stock-data.js"
 
 export default function Dashboard() {
+
+    const navigate = useNavigate()
+    const handleClick = (symbol) => {
+        navigate(`/stocks/${symbol}`)
+    }
 
     return (
         <div >
@@ -22,21 +27,15 @@ export default function Dashboard() {
                     </thead>
                     <tbody>
                         {Data.map(({ name, symbol, change, lastPrice, open }, idx) =>
-                            <tr key={idx}>
+                            <tr key={idx} onClick={() => handleClick(symbol)}>
                                 <td>
-                                    <Link to={`/stocks/${symbol}`}>
-                                            <div className="company-name">{name}</div>
-                                    </Link>
+                                    <div className="company-name">{name}</div>
                                 </td>
                                 <td>
-                                    <Link to={`/stocks/${symbol}`}>
-                                        <div className="price">{lastPrice}</div>
-                                    </Link>
+                                    <div className="price">{lastPrice}</div>
                                 </td>
                                 <td>
-                                    <Link to={`/stocks/${symbol}`}>
-                                        <div className={parseFloat(change).toFixed(2) >= 0 ? "green change" : "red change"}>{parseFloat(open).toFixed(2)} ({(parseFloat(change).toFixed(2) >= 0 ? `+${parseFloat(change).toFixed(2)}` : parseFloat(change).toFixed(2))})</div>
-                                    </Link>
+                                    <div className={parseFloat(change).toFixed(2) >= 0 ? "green change" : "red change"}>{parseFloat(open).toFixed(2)} ({(parseFloat(change).toFixed(2) >= 0 ? `+${parseFloat(change).toFixed(2)}` : parseFloat(change).toFixed(2))})</div>
                                 </td>
                             </tr>
                         )}
