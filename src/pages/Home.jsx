@@ -1,6 +1,9 @@
 export default function Home() {
 
     return (
-        <h1> This is the Home component</h1>    
+        <div className="home">
+            <h1> Stocks </h1> 
+            <p> Display Current Finance Events Here</p>
+        </div>   
     )
 }
